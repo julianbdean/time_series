@@ -25,7 +25,9 @@ ggplot() +
   geom_ribbon(data = filter(forecast, ds > max(historical$ds)), aes(x = ds, ymin = yhat_lower, ymax = yhat_upper), 
               fill = "blue", alpha = 0.3) +
   geom_line(data = historical, aes(x = ds, y = y, linetype = "Actual"), color = "black") +
-  labs(x = "Date", y = "Passengers", title = "AirPassengers forecast with Prophet") +
+  labs(x = "Date", y = "Passengers", title = "Passengers forecast with Prophet") +
   scale_linetype_manual(name = "Data Type", values = c("Actual" = "solid", "Forecast" = "dashed")) +
   theme_classic()
 
+
+ggsave(filename = 'prophet_passengers.jpg')
