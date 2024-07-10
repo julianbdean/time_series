@@ -1,20 +1,18 @@
-# Import necessary libraries
+# Packages
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.datasets import co2
 from pandas.plotting import register_matplotlib_converters
 
-# Load data (AirPassengers is available in statsmodels datasets)
+# Load data
 data = co2.load_pandas().data
 df = pd.DataFrame(data['co2'].copy())
 df.columns = ['passengers']
 
-# Fit an ARIMA model
+# Fit ARIMA
 model = ARIMA(df, order=(1, 1, 1))
 fit = model.fit()
-
-# Forecast the next 12 months
 forecasted_data = fit.forecast(steps=12)
 
 forecast_df = pd.DataFrame(forecasted_data)
@@ -24,9 +22,9 @@ df['forecast'] = 0
 forecast_df['forecast'] = 1
 
 full_data  = pd.concat([df, forecast_df], axis = 0)
-plot_data = full_data[full_data.index >= '1990-01-01']
+plot_data = full_data[full_data.index >= '1990-01-01'] ## The forecast is easier to see if there are less data
 
-# Plotting
+########## Plotting
 plt.figure(figsize=(10, 6))
 
 # Plot solid lines for forecast = 0
