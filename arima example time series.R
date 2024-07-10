@@ -1,6 +1,7 @@
 # Packages
 library(forecast)
 library(tidyverse)
+library(zoo)
 
 # Data
 data(AirPassengers)
@@ -29,3 +30,5 @@ ggplot() +
   geom_ribbon(data = forecast_df, aes(x = Date, ymin = Lo.95, ymax = Hi.95), fill = "grey", alpha = 0.5) +
   labs(x = "Year", y = "Passengers", title = "Passenger count forecast using ARIMA") +
   theme_classic()
+
+ggsave(filename = "passenger_forecast_arima_R.jpg")
